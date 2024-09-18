@@ -1,0 +1,10 @@
+{
+  // "include": ["src/**/*.ts"], // "**" = all subfolders | "*.ts" = all .ts files
+  "files": ["src/index.ts"],  // les fichiers à compiler (comme include)
+  "compilerOptions": {
+    "outDir": "dist",         // le chemin cible du build
+    "allowJs": true,          // copie aussi le js dans la cible
+    "module": "ESNext",       // quelle version de module est utilisée
+    "target": "ES5"           // dans quelle version js on compile
+  }
+}
