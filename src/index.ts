@@ -1,79 +1,103 @@
-abstract class Engine  {
-  constructor(protected type: string){}
+// interface User 
+// {
+//   readonly username: string;
+//   age: number;
+//   isDrinking?: boolean; // '?' veut dire que la propriété est optionnelle
+//   isSmoking?: boolean;
+//   isHealthy?: boolean;
+//   [propName: string]: any;
+// };
 
-  abstract stopEngine(): number;
+// const ids: readonly string[] = ['1', '2', '3'];
+// ids.push('1'); // erreur car readonly
 
+// const user: User = 
+// {
+//   username: 'Jean',
+//   age: 30,
+//   isDrinking: true,
+//   isSmoking: true,
+//   isHealthy: false
+// }
+
+// user.username = "Pierre"; // erreur car readonly
+
+// const newUser: User = 
+// {
+//   username: 'Paul',
+//   age: 50,
+//   isOnline: true,
+//   isOffline: false
+// };
+
+// function greet (user: { username: string }): void
+// {
+//   console.log(`hello ${user.username}`); 
+// }
+
+// function death(user: User) {}
+
+// function goodShape(user: User) {}
+
+// greet(user);
+
+// interface FonctionDeRecherche {
+//   (critere1: number, critere2: string): boolean;
+// }
+
+// let recherche: FonctionDeRecherche = (crit1, crit2) => {
+//   return true;
+// }
+
+// interface User2 {
+//   prenom: string;
+//   direBonjour(nom: string): void;
+// }
+
+// const user2: User2 = {
+//   prenom: 'Jean',
+//   direBonjour(nom: string) {
+//     console.log(`Bonjour, je m'appelle ${this.prenom} ${nom}`);
+//   }
+// }
+
+interface Vehicule {
+  name: string;
+  drive: () => void;
 }
 
-class Vehicule extends Engine {
-  wheel = 4;
-
-  protected brand: string;
-
-  constructor(brand: string) {
-    super('v8');
-    this.brand = brand;
-  }
-
-  stopEngine() {
-    console.log('stop engine');
-    return 0;
-  }
+interface Engine {
+  type: string;
 }
 
+// interface Car extends Vehicule, Engine {
+//   wheels: number;
+// }
 
-class Voiture extends Vehicule {
-  static className = 'Vehicule';
+// const newCar: Car = {
+//   name: 'Tesla',
+//   type: 'electric',
+//   wheels: 4,
+//   drive() {}
+// }
 
-  static startCar() {
-    console.log('car can start');
-    
-  }
-
-  private maxSpeed: number = 100;
-  readonly airbag: boolean;
-
-  move(): void {
-    console.log('car move');
-  }
-
-  faster(newSpeed: number): void {
-    if (newSpeed < this.maxSpeed) {
-      this.speed = newSpeed;
-    }
-  }
-
-  stop(): void {
-    console.log('car stop');
-  }
-
-  changeBrand(newBrand: string): void {
-    this.brand = newBrand;
-  }
-
-  constructor(public speed: number) {
-    super('dacia');
-    this.airbag = true;
-    this.speed = speed;
-  }
+class Car implements Vehicule, Engine {
+  drive() {}
+  constructor(public name: string, public type: string, public wheels: number) {}
 }
 
-let car: Voiture;
-car = new Voiture(30);
-// car.maxSpeed = 200;
-// car.brand = 'tesla';
-// car.changeBrand('citroen');
+class Player {
+  constructor(private isPlaying: boolean) {}
+}
 
-// console.log('car.wheel', car.wheel);
-// console.log('car.maxSpeed', car.maxSpeed);
-console.log(Voiture.className);
-console.log(Voiture.startCar());
+interface PlayerBasic extends Player {
+  play: () => void;
+}
 
+class Mp3Player extends Player implements PlayerBasic {
+  play() {}
+}
 
-console.log('car', car);
-
-
-
-
-//---------------
-
+class Game extends Player implements PlayerBasic {
+  play() {}
+}
