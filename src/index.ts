@@ -1,103 +1,60 @@
-// interface User 
-// {
-//   readonly username: string;
-//   age: number;
-//   isDrinking?: boolean; // '?' veut dire que la propriété est optionnelle
-//   isSmoking?: boolean;
-//   isHealthy?: boolean;
-//   [propName: string]: any;
+// let userStatus: 'online' | 'offline' | 'busy' = 'online';
+
+// let value: number | string;
+// value = 5;
+// value = 'hello';
+// // value = true; // Error: Type 'boolean' is not assignable to type 'number | string'.
+
+// interface Car {
+//   category: 'car';
+//   seat: number;
+//   drive: () => void;
 // };
 
-// const ids: readonly string[] = ['1', '2', '3'];
-// ids.push('1'); // erreur car readonly
-
-// const user: User = 
-// {
-//   username: 'Jean',
-//   age: 30,
-//   isDrinking: true,
-//   isSmoking: true,
-//   isHealthy: false
-// }
-
-// user.username = "Pierre"; // erreur car readonly
-
-// const newUser: User = 
-// {
-//   username: 'Paul',
-//   age: 50,
-//   isOnline: true,
-//   isOffline: false
+// interface Truck {
+//   category: 'truck';
+//   seat: number;
+//   load: (amount: number) => void;
+//   drive: () => void;
 // };
 
-// function greet (user: { username: string }): void
-// {
-//   console.log(`hello ${user.username}`); 
-// }
+// const myVehicle: Car | Truck = {
+//   category: 'truck',
+//   seat: 4,
+//   load: (amount: number): void => {},
+//   drive: () => {}
+// };
 
-// function death(user: User) {}
-
-// function goodShape(user: User) {}
-
-// greet(user);
-
-// interface FonctionDeRecherche {
-//   (critere1: number, critere2: string): boolean;
-// }
-
-// let recherche: FonctionDeRecherche = (crit1, crit2) => {
-//   return true;
-// }
-
-// interface User2 {
-//   prenom: string;
-//   direBonjour(nom: string): void;
-// }
-
-// const user2: User2 = {
-//   prenom: 'Jean',
-//   direBonjour(nom: string) {
-//     console.log(`Bonjour, je m'appelle ${this.prenom} ${nom}`);
+// function vehiculeFactory(type: 1 | 2): Car | Truck {
+//   if (type === 1) {
+//     return {
+//       category: 'car',
+//       seat: 4,
+//       drive: () => {}
+//     };
+//   } else {
+//     return {
+//       category: 'truck',
+//       seat: 2,
+//       load: (amount: number): void => {},
+//       drive: () => {}
+//     };
 //   }
 // }
 
-interface Vehicule {
-  name: string;
-  drive: () => void;
-}
+// const foo = vehiculeFactory(2);
 
-interface Engine {
-  type: string;
-}
-
-// interface Car extends Vehicule, Engine {
-//   wheels: number;
+// if (foo.category === 'truck') {
+//   foo.load(5);
 // }
 
-// const newCar: Car = {
-//   name: 'Tesla',
-//   type: 'electric',
-//   wheels: 4,
-//   drive() {}
+// function startTrip(v: Car | Truck) {
+//   v.drive ();
+//   switch (v.category) {
+//     case 'car':
+//       break;
+//     case 'truck':
+//       v.load(5);
+//       break;
+//   }
 // }
-
-class Car implements Vehicule, Engine {
-  drive() {}
-  constructor(public name: string, public type: string, public wheels: number) {}
-}
-
-class Player {
-  constructor(private isPlaying: boolean) {}
-}
-
-interface PlayerBasic extends Player {
-  play: () => void;
-}
-
-class Mp3Player extends Player implements PlayerBasic {
-  play() {}
-}
-
-class Game extends Player implements PlayerBasic {
-  play() {}
-}
